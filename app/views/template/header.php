@@ -5,7 +5,7 @@ function getActive($rota)
   $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
  
   // Remove a parte '/exfe/public/' do começo
-  $basePath = '/devcycle/exfe/public/';
+  $basePath = '/exfe/public/';
   $pagina = str_replace($basePath, '', $path);
  
  
@@ -57,7 +57,7 @@ function getActive($rota)
         <input type="checkbox" class="theme-toggle-button">
         <span class="toggle"></span>
       </label>
-      <a class="<?= getActive('instalacao') ?>" href="http://agenciatipi02.smpsistema.com.br/devcycle/exfemobile/public/index.php?url=instalacao" style="color: white;">
+      <a class="<?= getActive('instalacao') ?>" href="<?= BASE_URL ?>index.php?url=instalacao" style="color: white;">
         App
       </a>
  

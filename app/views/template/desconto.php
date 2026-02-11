@@ -6,7 +6,7 @@
       <p>Assine a Nossa Newsletter e Receba 10% de Desconto.</p>
     </div>
     <div class="emailItems">
-      <form action="https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/newsletter/inscrever" method="POST">
+      <form action="<?= BASE_URL ?>newsletter/inscrever" method="POST">
         <input class="email" type="email" id="email" name="email" placeholder="&#9993; Endereço de E-mail" required>
 
         <div class="buttons">

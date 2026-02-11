@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png" />
-    <link rel="stylesheet" href="https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/css/dash.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/dash.css">
     <link rel="icon" type="image/png"
-        href="https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/imgDash/coffeBranco.png" />
+        href="<?= BASE_URL ?>assets/imgDash/coffeBranco.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css"
         crossorigin="anonymous">
@@ -19,11 +19,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <link href="https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/css/nucleo-svg.css"
+    <link href="<?= BASE_URL ?>assets/css/nucleo-svg.css"
         rel="stylesheet" />
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous" defer></script>
     <link id="pagestyle"
-        href="https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/css/argon-dashboard.css?v=2.1.0"
+        href="<?= BASE_URL ?>assets/css/argon-dashboard.css?v=2.1.0"
         rel="stylesheet" />
   <title> Menu Exfé</title>
     <style>
@@ -297,14 +297,14 @@
                 <div class="swiper-wrapper">
 
                     <div class="swiper-slide" style="position: relative; overflow: hidden;">
-                        <video src="https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/img/videoTv.mp4"
+                        <video src="<?= BASE_URL ?>assets/img/videoTv.mp4"
                             autoplay muted loop playsinline></video>
 
                     </div>
 
 
                     <div class="swiper-slide"
-                        style="background-image: url('https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/img/hero-bg2.png');  background-position: center;">
+                        style="background-image: url('<?= BASE_URL ?>assets/img/hero-bg2.png');  background-position: center;">
 
 
                         <div class="container-fluid">
@@ -359,7 +359,7 @@
                     <div class="swiper-slide" style="position: relative; overflow: hidden;">
                         <!-- Vídeo como background -->
                         <video
-                            src="https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/img/videoTv2.mp4"
+                            src="<?= BASE_URL ?>assets/img/videoTv2.mp4"
                             autoplay muted loop playsinline></video>
 
                         <!-- Conteúdo sobreposto -->
@@ -396,7 +396,7 @@
                                     </ul>
                                 </article>
                                 <figure data-animation="zoomIn">
-                                    <img src="https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/img/cup-img.webp"
+                                    <img src="<?= BASE_URL ?>assets/img/cup-img.webp"
                                         alt="Caramelo Macchiato">
                                 </figure>
                             </div>
@@ -423,7 +423,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         crossorigin="anonymous"></script>
-    <script src="https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/script/script.js"></script>
+    <script src="<?= BASE_URL ?>assets/script/script.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

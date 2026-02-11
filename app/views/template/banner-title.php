@@ -24,11 +24,11 @@
 
     <figure>
 
-      <img src="https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/img/image.webp" alt="">
+      <img src="<?= BASE_URL ?>assets/img/image.webp" alt="">
     </figure>
 
     <figure>
-      <img src="https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/img/cup-img3.webp" alt="">
+      <img src="<?= BASE_URL ?>assets/img/cup-img3.webp" alt="">
     </figure>
 
   </div>
@@ -51,7 +51,7 @@
     </ul>
     <div class="avaliacoes-perfil">
 
-      <img src="https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/img/group-img.png" alt="">
+      <img src="<?= BASE_URL ?>assets/img/group-img.png" alt="">
 
     </div>
 

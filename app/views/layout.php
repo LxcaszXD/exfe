@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/css/style.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/style.css">
 
 
     <title>Exfé</title>
@@ -113,7 +113,7 @@
                     <button id="salvar-posicoes" class="btn fw-bold px-4 py-2 me-2" style="background:#5e3c2d; color: white;">
                         Salvar Layout
                     </button>
-                    <a href="https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/mesa/adicionar/" class="btn fw-bold px-4 py-2" style="background:#9a5c1f; color: white;">
+                    <a href="<?= BASE_URL ?>mesa/adicionar/" class="btn fw-bold px-4 py-2" style="background:#9a5c1f; color: white;">
                         Adicionar Mesa
                     </a>
                 </div>
@@ -230,7 +230,7 @@
                 //#region Ações do Modal da Mesa
                 function editarMesa() {
                     if (mesaAtual) {
-                        window.location.href = `https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/mesa/editar/${mesaAtual}`;
+                        window.location.href = `<?= BASE_URL ?>mesa/editar/${mesaAtual}`;
                     }
                 }
 
@@ -256,7 +256,7 @@
                         };
                     });
 
-                    fetch('https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/mesa/salvarPosicoes', {
+                    fetch('<?= BASE_URL ?>mesa/salvarPosicoes', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -285,7 +285,7 @@
                 });
 
                 function desativarMesa(idMesa) {
-                    fetch(`https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/mesa/desativar/${idMesa}`, {
+                    fetch(`<?= BASE_URL ?>mesa/desativar/${idMesa}`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
@@ -313,7 +313,7 @@
                 });
 
                 function atualizarStatusMesa(id, status) {
-                    fetch(`https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/mesa/atualizarStatusMesa/${id}/${status}`, {
+                    fetch(`<?= BASE_URL ?>mesa/atualizarStatusMesa/${id}/${status}`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'

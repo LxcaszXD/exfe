@@ -2,7 +2,7 @@
 RewriteEngine On
 
 # Define o caminho base para todas as regras
-RewriteBase /devcycle/exfe/public/
+RewriteBase /exfe/public/
 
 # Libera o cabeçalho Authorization para PHP
 RewriteCond %{HTTP:Authorization} ^(.*)

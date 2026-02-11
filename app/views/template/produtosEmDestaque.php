@@ -40,22 +40,22 @@
       <button>
         Ver mais
         <div class="star-1">
-          <img src="https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/img/coffee-bean-button.webp" alt="">
+          <img src="<?= BASE_URL ?>assets/img/coffee-bean-button.webp" alt="">
         </div>
         <div class="star-2">
-          <img src="https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/img/coffee-bean-button.webp" alt="">
+          <img src="<?= BASE_URL ?>assets/img/coffee-bean-button.webp" alt="">
         </div>
         <div class="star-3">
-          <img src="https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/img/coffee-bean-button.webp" alt="">
+          <img src="<?= BASE_URL ?>assets/img/coffee-bean-button.webp" alt="">
         </div>
         <div class="star-4">
-          <img src="https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/img/coffee-bean-button.webp" alt="">
+          <img src="<?= BASE_URL ?>assets/img/coffee-bean-button.webp" alt="">
         </div>
         <div class="star-5">
-          <img src="https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/img/coffee-bean-button.webp" alt="">
+          <img src="<?= BASE_URL ?>assets/img/coffee-bean-button.webp" alt="">
         </div>
         <div class="star-6">
-          <img src="https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/img/coffee-bean-button.webp" alt="">
+          <img src="<?= BASE_URL ?>assets/img/coffee-bean-button.webp" alt="">
         </div>
       </button>
     </a>
