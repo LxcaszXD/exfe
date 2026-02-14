@@ -136,7 +136,7 @@ input:focus, select:focus {
 
                     <div class="mt-4 text-center d-flex flex-column flex-sm-row justify-content-center gap-3">
                         <button type="submit" class="btn btn-lg px-4" style="background: #371406; color:#ffffff; font-weight: bold; border-radius: 12px;">Salvar</button>
-                        <a href="<?= BASE_URL ?>cafes" class="btn btn-lg px-4" style="background: #371406; color: #ffffff; font-weight: bold; border-radius: 12px;">Cancelar</a>
+                        <a href="<?= BASE_URL ?>cafes/listar/" class="btn btn-lg px-4" style="background: #371406; color: #ffffff; font-weight: bold; border-radius: 12px;">Cancelar</a>
                     </div>
                 </div>
             </div>

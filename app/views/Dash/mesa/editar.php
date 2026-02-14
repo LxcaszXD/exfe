@@ -1,10 +1,10 @@
-<form method="POST" action="https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/mesa/editar/<?php echo $mesa['id_mesa']; ?>" enctype="multipart/form-data">
+<form method="POST" action="<?= BASE_URL ?>mesa/editar/<?php echo $mesa['id_mesa']; ?>" enctype="multipart/form-data">
     <div class="container-fluid py-4">
         <div class="row">
             <!-- Imagem da Mesa -->
             <div class="col-md-4 text-center mb-3 mb-md-0">
                 <div class="image-container" style="width: 100%; max-width: 200px; aspect-ratio: 1/1; overflow: hidden; border-radius: 50%; margin: auto;">
-                    <img src="<?php echo !empty($mesa['foto_mesa']) ? 'https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/uploads/' . $mesa['foto_mesa'] : 'https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/img/hero-bg3.png'; ?>" 
+                    <img src="<?php echo !empty($mesa['foto_mesa']) ? '<?= BASE_URL ?>assets/uploads/' . $mesa['foto_mesa'] : '<?= BASE_URL ?>assets/img/hero-bg3.png'; ?>" 
                             alt="Foto da Mesa" 
                             class="img-fluid" 
                             id="preview-img" 

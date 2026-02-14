@@ -74,7 +74,7 @@ if (isset($_SESSION['mensagem']) && isset($_SESSION['tipo-msg'])) {
                         <td><?php echo htmlspecialchars($linha['data_avaliacao']); ?></td>
 
                         <td>
-                            <a href="https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/avaliacao/editar/<?php echo $linha['id_avaliacao']; ?>" title="Editar">
+                            <a href="<?= BASE_URL ?>avaliacao/editar/<?php echo $linha['id_avaliacao']; ?>" title="Editar">
                                 <i class="fa fa-pencil-alt" style="font-size: 20px; color: #5e3c2d;"></i>
                             </a>
                         </td>
@@ -92,7 +92,7 @@ if (isset($_SESSION['mensagem']) && isset($_SESSION['tipo-msg'])) {
 
     <div class="text-center mt-4">
         <h3 style="color: #5e3c2dad;">Deseja cadastrar uma nova Avaliação?</h3>
-        <a href="https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/avaliacao/adicionar/" class="btn fw-bold px-4 py-2" style="background:#5e3c2d; color: #ffffff; border-radius: 8px;">
+        <a href="<?= BASE_URL ?>avaliacao/adicionar/" class="btn fw-bold px-4 py-2" style="background:#5e3c2d; color: #ffffff; border-radius: 8px;">
             Adicionar Avaliação
         </a>
     </div>
@@ -143,7 +143,7 @@ if (isset($_SESSION['mensagem']) && isset($_SESSION['tipo-msg'])) {
     });
 
     function excluirAvaliacao(idAvaliacao) {
-        fetch(`https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/avaliacao/excluir/${idAvaliacao}`, {
+        fetch(`<?= BASE_URL ?>avaliacao/excluir/${idAvaliacao}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

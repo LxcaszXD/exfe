@@ -123,7 +123,7 @@ class EventoController extends Controller
 
                 $_SESSION['mensagem'] = "Evento atualizado com sucesso!";
                 $_SESSION['tipo-msg'] = "sucesso";
-                header('Location: /public/evento/listar');
+                    header("Location: " . BASE_URL . "evento/listar");
                 exit;
             } else {
                 $dados['mensagem'] = "Preencha todos os campos obrigatórios.";

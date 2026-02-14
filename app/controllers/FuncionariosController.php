@@ -60,20 +60,20 @@ class FuncionariosController extends Controller
     public function listar()
     {
         $funcionarioModel = new Funcionario();
-    
+
         // Captura o status da URL
         $status = isset($_GET['status']) && !empty($_GET['status']) ? $_GET['status'] : null;
-    
+
         // Carrega os funcionários de acordo com o status
         $dados['funcionarios'] = $funcionarioModel->getListarFuncionario($status);
-    
+
         // Passa também o status atual para a view (para manter o <select>)
         $dados['status'] = $status;
-    
+
         // Dados do funcionário logado
         $dados['func'] = $funcionarioModel->buscarfuncionario($_SESSION['userEmail']);
         $dados['conteudo'] = 'dash/funcionario/listar';
-    
+
         if ($_SESSION['id_tipo_usuario'] == '1') {
             $this->carregarViews('dash/dashboard', $dados);
         } else if ($_SESSION['id_tipo_usuario'] == '2') {
@@ -166,7 +166,7 @@ class FuncionariosController extends Controller
                     // Mensagem de SUCESSO 
                     $_SESSION['mensagem'] = "Funcionario Cadastrado com Sucesso";
                     $_SESSION['tipo-msg'] = "sucesso";
-                    header('Location: https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/funcionarios/listar');
+                    header('Location: ' . BASE_URL . 'funcionarios/listar');
                     exit;
                 } else {
                     $dados['mensagem'] = "Erro ao adicionar Ao adcionar funcionario";
@@ -192,112 +192,75 @@ class FuncionariosController extends Controller
     }
 
     // 3- Método para editar
-     public function editar($id = null)
-{
-    if ($id === null) {
-        header('Location: https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/funcionarios/listar');
-        exit;
-    }
+    public function editar($id = null)
+    {
+        $dados = array();
+        $dados['conteudo'] = 'dash/funcionario/editar';
 
-    $dados = array();
-    $dados['conteudo'] = 'dash/funcionario/editar';
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // TBL Funcionario - sanitização
-        $email_funcionario       = filter_input(INPUT_POST, 'email_funcionario', FILTER_SANITIZE_SPECIAL_CHARS);
-        $nome_funcionario        = filter_input(INPUT_POST, 'nome_funcionario', FILTER_SANITIZE_SPECIAL_CHARS);
-        $nasc_funcionario        = $_POST['nasc_funcionario']; // data não deve ser float
-        $senha_funcionario       = $_POST['senha_funcionario']; // senha também não deve ser float
-        $cpf_cnpj                = filter_input(INPUT_POST, 'cpf_cnpj', FILTER_SANITIZE_SPECIAL_CHARS);
-        $status_funcionario      = filter_input(INPUT_POST, 'status_funcionario', FILTER_SANITIZE_SPECIAL_CHARS);
-        $telefone_funcionario    = filter_input(INPUT_POST, 'telefone_funcionario', FILTER_SANITIZE_SPECIAL_CHARS);
-        $endereco_funcionario    = filter_input(INPUT_POST, 'endereco_funcionario', FILTER_SANITIZE_SPECIAL_CHARS);
-        $bairro_funcionario      = filter_input(INPUT_POST, 'bairro_funcionario', FILTER_SANITIZE_SPECIAL_CHARS);
-        $cidade_funcionario      = filter_input(INPUT_POST, 'cidade_funcionario', FILTER_SANITIZE_SPECIAL_CHARS);
-        $id_tipo_usuario         = filter_input(INPUT_POST, 'id_tipo_usuario', FILTER_SANITIZE_SPECIAL_CHARS);
-        $cargo_funcionario       = filter_input(INPUT_POST, 'cargo_funcionario', FILTER_SANITIZE_SPECIAL_CHARS);
-        $cep_funcionario         = filter_input(INPUT_POST, 'cep_funcionario', FILTER_SANITIZE_SPECIAL_CHARS);
-        $id_estado               = filter_input(INPUT_POST, 'id_estado', FILTER_SANITIZE_NUMBER_INT);
-
-        // Foto do funcionário: verifica se há nova
-        $foto_funcionario = '';
-
-        if (isset($_FILES['foto_funcionario']) && $_FILES['foto_funcionario']['error'] === 0) {
-            $arquivo = $this->uploadFoto($_FILES['foto_funcionario']);
-            if ($arquivo) {
-                $foto_funcionario = $arquivo;
-            }
-        } else {
-            // Se não enviou nova, busca a atual do banco
-            $func = $this->funcionarioModel->getFuncionarioById($id);
-            $foto_funcionario = $func['foto_funcionario'];
+        if ($id === null) {
+            header('Location: ' . BASE_URL . 'funcionarios/listar');
+            exit;
         }
 
-        if ($nome_funcionario && $email_funcionario && $senha_funcionario !== false) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Sanitização (Garantindo que todos os campos do seu formulário sejam capturados)
             $dadosFuncionario = array(
-                'nome_funcionario'       => $nome_funcionario,
-                'foto_funcionario'       => $foto_funcionario,
-                'cpf_cnpj'               => $cpf_cnpj,
-                'email_funcionario'      => $email_funcionario,
-                'nasc_funcionario'       => $nasc_funcionario,
-                'senha_funcionario'      => $senha_funcionario,
-                'id_tipo_usuario'        => $id_tipo_usuario,
-                'status_funcionario'     => $status_funcionario,
-                'telefone_funcionario'   => $telefone_funcionario,
-                'endereco_funcionario'   => $endereco_funcionario,
-                'bairro_funcionario'     => $bairro_funcionario,
-                'cidade_funcionario'     => $cidade_funcionario,
-                'cargo_funcionario'      => $cargo_funcionario,
-                'cep_funcionario'        => $cep_funcionario,
-                'id_estado'              => $id_estado
+                'nome_funcionario'     => filter_input(INPUT_POST, 'nome_funcionario', FILTER_SANITIZE_SPECIAL_CHARS),
+                'email_funcionario'    => filter_input(INPUT_POST, 'email_funcionario', FILTER_SANITIZE_EMAIL),
+                'senha_funcionario'    => filter_input(INPUT_POST, 'senha_funcionario', FILTER_DEFAULT), // Ideal usar password_hash depois
+                'nasc_funcionario'     => filter_input(INPUT_POST, 'nasc_funcionario', FILTER_DEFAULT),
+                'cpf_cnpj'             => filter_input(INPUT_POST, 'cpf_cnpj', FILTER_SANITIZE_SPECIAL_CHARS),
+                'status_funcionario'   => filter_input(INPUT_POST, 'status_funcionario', FILTER_SANITIZE_SPECIAL_CHARS),
+                'telefone_funcionario' => filter_input(INPUT_POST, 'telefone_funcionario', FILTER_SANITIZE_SPECIAL_CHARS),
+                'endereco_funcionario' => filter_input(INPUT_POST, 'endereco_funcionario', FILTER_SANITIZE_SPECIAL_CHARS),
+                'bairro_funcionario'   => filter_input(INPUT_POST, 'bairro_funcionario', FILTER_SANITIZE_SPECIAL_CHARS),
+                'cidade_funcionario'   => filter_input(INPUT_POST, 'cidade_funcionario', FILTER_SANITIZE_SPECIAL_CHARS),
+                'id_tipo_usuario'      => filter_input(INPUT_POST, 'id_tipo_usuario', FILTER_SANITIZE_NUMBER_INT),
+                'cargo_funcionario'    => filter_input(INPUT_POST, 'cargo_funcionario', FILTER_SANITIZE_SPECIAL_CHARS),
+                'cep_funcionario'      => filter_input(INPUT_POST, 'cep_funcionario', FILTER_SANITIZE_SPECIAL_CHARS),
+                'id_estado'            => filter_input(INPUT_POST, 'id_estado', FILTER_SANITIZE_NUMBER_INT)
             );
 
-            // Atualizar no banco
-            $atualizado = $this->funcionarioModel->updateFuncionario($id, $dadosFuncionario);
+            // Validação simples: se nome e email não estão vazios
+            if (!empty($dadosFuncionario['nome_funcionario']) && !empty($dadosFuncionario['email_funcionario'])) {
 
-            if ($atualizado) {
-                $_SESSION['mensagem'] = "Funcionário atualizado com sucesso!";
-                $_SESSION['tipo-msg'] = "sucesso";
-                header('Location: https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/funcionarios/listar');
-                exit;
+                $atualizado = $this->funcionarioModel->updateFuncionario($id, $dadosFuncionario);
+
+                if ($atualizado) {
+                    $_SESSION['mensagem'] = "Funcionário atualizado com sucesso!";
+                    $_SESSION['tipo-msg'] = "sucesso";
+                    header('Location: ' . BASE_URL . 'funcionarios/listar');
+                    exit;
+                } else {
+                    $dados['mensagem'] = "Erro ao atualizar no banco de dados.";
+                    $dados['tipo-msg'] = "erro";
+                }
             } else {
-                $dados['mensagem'] = "Erro ao atualizar funcionário.";
+                $dados['mensagem'] = "Campos obrigatórios vazios.";
                 $dados['tipo-msg'] = "erro";
             }
+        }
+
+        // Carregar dados para a View
+        $dados['funcionarios'] = $this->funcionarioModel->getFuncionarioById($id);
+        $estadoModel = new Estado();
+        $dados['estados'] = $estadoModel->getListarEstados();
+
+        // Controle de View (Dashboard)
+        $funcionario = new Funcionario();
+        $userLogado = $funcionario->buscarFuncionario($_SESSION['userEmail']);
+
+        if ($_SESSION['id_tipo_usuario'] == '1') {
+            $dados['funcionario'] = $userLogado;
+            $this->carregarViews('dash/dashboard', $dados);
         } else {
-            $dados['mensagem'] = "Preencha todos os campos obrigatórios.";
-            $dados['tipo-msg'] = "erro";
+            $dados['func'] = $userLogado;
+            $this->carregarViews('dash/dashboard-funcionario', $dados);
         }
     }
-
-    // Carrega dados do funcionário
-    $funcionarios = $this->funcionarioModel->getFuncionarioById($id);
-    $dados['funcionarios'] = $funcionarios;
-
-    // Lista estados
-    $estadoModel = new Estado();
-    $dados['estados'] = $estadoModel->getListarEstados();
-
-    // Usuário logado (gerente ou funcionário)
-    if ($_SESSION['id_tipo_usuario'] == '1') {
-        $funcionario = new Funcionario();
-        $dados['funcionario'] = $funcionario->buscarFuncionario($_SESSION['userEmail']);
-        $this->carregarViews('dash/dashboard', $dados);
-    } else {
-        $funcionario = new Funcionario();
-        $dados['func'] = $funcionario->buscarFuncionario($_SESSION['userEmail']);
-        $this->carregarViews('dash/dashboard-funcionario', $dados);
-    }
-}
-
-
-
     // 4- Método para desativar o serviço
     public function desativar($id = null)
     {
-
-
-
 
         if ($id === null) {
             http_response_code(400);
@@ -329,9 +292,6 @@ class FuncionariosController extends Controller
     // 5- Método para sativar o serviço
     public function ativar($id = null)
     {
-
-
-
 
         if ($id === null) {
             http_response_code(400);
@@ -389,7 +349,6 @@ class FuncionariosController extends Controller
         return false;
     }
 
-
     // Método para exibir o perfil do cliente logado
     public function perfil()
     {
@@ -422,7 +381,6 @@ class FuncionariosController extends Controller
         }
     }
 
-
     public function buscarAjax()
     {
         $termo = $_GET['termo'] ?? '';
@@ -434,5 +392,4 @@ class FuncionariosController extends Controller
         echo json_encode($funcionarios);
         exit;
     }
-
 } //FIM DA CLASSE

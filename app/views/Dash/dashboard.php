@@ -401,8 +401,8 @@ $dados['acompanhamentos'] = $acompanhamentos;
               <span class="toggle"></span>
             </label>
             <li class="nav-item d-flex align-items-center" style="margin: 5%;">
-              <a href="<?= BASE_URL ?>auth/sair" class="nav-link font-weight-bold px-0">
-                <i class="fa fa-user me-sm-1"></i>
+              <a href="<?= BASE_URL ?>auth/sair" class="nav-link font-weight-bold px-0" style="color: #fff;">
+                <i class="fa fa-user me-sm-1" style="color: #fff;"></i>
                 <span class="d-sm-inline d-none">Sair</span>
               </a>
             </li>

@@ -1,10 +1,10 @@
-<form method="POST" action="https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/funcionarios/adicionar" enctype="multipart/form-data">
+<form method="POST" action="<?= BASE_URL ?>funcionarios/adicionar" enctype="multipart/form-data">
   <div class="container-fluid py-4">
     <div class="row">
       <!-- Imagem do Funcionario -->
       <div class="col-md-4 text-center mb-3 mb-md-0">
         <div class="image-container" style="width: 100%; max-width: 200px; aspect-ratio: 1/1; overflow: hidden; border-radius: 50%; margin: auto;">
-          <img src="https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/img/hero-bg3.png" alt="exfe Logo" class="img-fluid" id="preview-img" style="cursor:pointer; border-radius:12px;">
+          <img src="<?= BASE_URL ?>assets/img/hero-bg3.png" alt="exfe Logo" class="img-fluid" id="preview-img" style="cursor:pointer; border-radius:12px;">
         </div>
         <input type="file" name="foto_funcionario" id="foto_funcionario" style="display: none;" accept="image/*">
       </div>
@@ -69,7 +69,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="cpf_cnpj_funcionario" class="form-control-label">CPF ou CNPJ</label>
-                  <input class="form-control" type="text" id="cpf_cnpj_funcionario" name="cpf_cnpj_funcionario" required>
+                  <input class="form-control" type="text" id="cpf_cnpj" name="cpf_cnpj" required>
                 </div>
               </div>
 

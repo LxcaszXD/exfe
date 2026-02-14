@@ -8,7 +8,7 @@
                     $fotoEvento = $evento['foto_evento'];
                     $fotoPath = BASE_URL . "uploads/" . $fotoEvento;
                     $fotoDefault = BASE_URL . "assets/img/evento_default.jpg";
-                    $imagePath = (!empty($fotoEvento) && file_exists($_SERVER['DOCUMENT_ROOT'] . "/devcycle/exfe/public/uploads/" . $fotoEvento)) ? $fotoPath : $fotoDefault;
+                    $imagePath = (!empty($fotoEvento) && file_exists($_SERVER['DOCUMENT_ROOT'] . BASE_URL . "uploads/" . $fotoEvento)) ? $fotoPath : $fotoDefault;
                     ?>
                     <img src="<?php echo $imagePath ?>" alt="<?php echo $evento['alt_foto_evento'] ?? 'Imagem do Evento'; ?>" class="img-fluid" id="preview-img" style="cursor:pointer; border-radius:12px;">
                 </div>

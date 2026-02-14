@@ -45,7 +45,8 @@
     <?php endforeach; ?>
   </div>
 
-<div class="buttons">
+    <div class="buttons">
+      <a href="<?= BASE_URL ?>blog">
       <button>
         Ver mais
         <div class="star-1">
@@ -67,6 +68,7 @@
           <img src="<?= BASE_URL ?>assets/img/coffee-bean-button.webp" alt="">
         </div>
       </button>
+    </a>
     </div>
 
 <div class="blogPosition">

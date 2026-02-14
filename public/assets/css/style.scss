@@ -255,7 +255,7 @@ html {
 
       /*  #endregion  */
 
-      background-image: url("https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/img/hero-bg.png");
+      background-image: url("../img/hero-bg.png");
       background-attachment: fixed;
       background-position: center;
 
@@ -379,7 +379,7 @@ html {
         width: 24px;
         height: 24px;
         border-radius: 50%;
-        background-image: url("https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/img/sun.png");
+        background-image: url("../img/sun.png");
         background-position: center;
         background-size: cover;
         box-shadow: 0 1px 2px rgba(44, 44, 44, 0.2);
@@ -478,7 +478,7 @@ html {
     // #region dark
 
     &.dark-mode {
-      background-image: url("https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/img/hero-bg2.png");
+      background-image: url("../img/hero-bg2.png");
       background-attachment: fixed;
       background-position: center;
 
@@ -708,7 +708,7 @@ html {
         width: 24px;
         height: 24px;
         border-radius: 50%;
-        background-image: url("https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/img/moon.png");
+        background-image: url("../img/moon.png");
         background-position: center;
         background-size: cover;
         box-shadow: 0 1px 2px rgba(44, 44, 44, 0.2);
@@ -1316,7 +1316,7 @@ html {
       }
 
       .overlay {
-        background-image: url("https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/img/hero-bg2.png");
+        background-image: url("../img/hero-bg2.png");
         background-attachment: fixed;
         background-position: center;
         background-repeat: no-repeat;
@@ -3817,7 +3817,7 @@ html {
             @include flex-center();
             display: flex !important;
             width: 430px;
-            height: 600px;
+            height: 500px;
             justify-content: flex-start;
             flex-direction: column;
             gap: 30px;
@@ -6544,6 +6544,7 @@ html {
 
     .footer {
       margin-top: 5%;
+      padding-top: 1%;
       @include flex-center();
       flex-direction: column;
       gap: 15px;
@@ -6566,8 +6567,8 @@ html {
           }
 
           img {
-            width: 250px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             margin-bottom: 20px;
           }
         }

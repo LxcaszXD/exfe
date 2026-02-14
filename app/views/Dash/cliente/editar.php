@@ -106,8 +106,8 @@ if (isset($_SESSION['mensagem']) && isset($_SESSION['tipo-msg'])) {
                 <div class="image-container">
                     <?php
                     $fotoCliente = $cliente['foto_cliente'];
-                    $fotoPath = BASE_URL . "public/uploads/" . $fotoCliente;
-                    $fotoDefault = BASE_URL . "public/assets/img/hero-bg3.png";
+                    $fotoPath = BASE_URL . "uploads/" . $fotoCliente;
+                    $fotoDefault = BASE_URL . "assets/img/hero-bg3.png";
                     $imagePath = (file_exists($_SERVER['DOCUMENT_ROOT'] . "/exfe/public/uploads/" . $fotoCliente) && !empty($fotoCliente)) ? $fotoPath : $fotoDefault;
                     ?>
                     <img src="<?php echo $imagePath ?>" alt="Foto do Cliente" class="img-fluid" id="preview-img" style="cursor:pointer; border-radius:12px;">

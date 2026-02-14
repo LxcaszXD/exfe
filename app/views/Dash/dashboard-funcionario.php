@@ -221,7 +221,7 @@ $dados['acompanhamentos'] = $acompanhamentos;
           </ul>
         </li>
 
-       
+
 
         <li class="nav-item mt-3">
           <h6>Account Pages</h6>
@@ -336,7 +336,7 @@ $dados['acompanhamentos'] = $acompanhamentos;
               <span class="toggle"></span>
             </label>
             <li class="nav-item d-flex align-items-center" style="margin: 5%;">
-              <a href="<?= BASE_URL ?>auth/sair" class="nav-link font-weight-bold px-0">
+              <a href="<?= BASE_URL ?>auth/sair" class="nav-link text-white font-weight-bold px-0">
                 <i class="fa fa-user me-sm-1"></i>
                 <span class="d-sm-inline d-none">Sair</span>
               </a>

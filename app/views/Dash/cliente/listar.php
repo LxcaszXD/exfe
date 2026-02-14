@@ -1,7 +1,9 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) session_start();
+// Verifique se a requisição NÃO é AJAX antes de imprimir HTML
+// (Muitos frameworks usam cabeçalhos específicos, ou você pode checar a URL)
+$isAjax = (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
 
-if (isset($_SESSION['mensagem'], $_SESSION['tipo-msg'])) {
+if (!$isAjax && isset($_SESSION['mensagem'], $_SESSION['tipo-msg'])) {
     $classeAlerta = ($_SESSION['tipo-msg'] === 'sucesso') ? 'alert-success' : 'alert-danger';
     echo '<div class="alert ' . $classeAlerta . ' text-center fw-bold" role="alert">'
         . htmlspecialchars($_SESSION['mensagem'], ENT_QUOTES, 'UTF-8') .

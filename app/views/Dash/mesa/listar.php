@@ -85,7 +85,7 @@ if (isset($_SESSION['mensagem']) && isset($_SESSION['tipo-msg'])) {
         <button id="salvar-posicoes" class="btn fw-bold px-4 py-2 me-2" style="background:#5e3c2d; color: white;">
             Salvar Layout
         </button>
-        <a href="https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/mesa/adicionar/" class="btn fw-bold px-4 py-2" style="background:#9a5c1f; color: white;">
+        <a href="<?= BASE_URL ?>mesa/adicionar/" class="btn fw-bold px-4 py-2" style="background:#9a5c1f; color: white;">
             Adicionar Mesa
         </a>
     </div>
@@ -202,7 +202,7 @@ if (isset($_SESSION['mensagem']) && isset($_SESSION['tipo-msg'])) {
     //#region Ações do Modal da Mesa
     function editarMesa() {
         if (mesaAtual) {
-            window.location.href = `https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/mesa/editar/${mesaAtual}`;
+            window.location.href = `<?= BASE_URL ?>mesa/editar/${mesaAtual}`;
         }
     }
 
@@ -233,7 +233,7 @@ if (isset($_SESSION['mensagem']) && isset($_SESSION['tipo-msg'])) {
             };
         });
 
-        fetch('https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/mesa/salvarPosicoes', {
+        fetch('<?= BASE_URL ?>mesa/salvarPosicoes', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -262,7 +262,7 @@ if (isset($_SESSION['mensagem']) && isset($_SESSION['tipo-msg'])) {
     });
 
     function desativarMesa(idMesa) {
-        fetch(`https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/mesa/desativar/${idMesa}`, {
+        fetch(`<?= BASE_URL ?>mesa/desativar/${idMesa}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -290,7 +290,7 @@ if (isset($_SESSION['mensagem']) && isset($_SESSION['tipo-msg'])) {
     });
 
     function atualizarStatusMesa(id, status) {
-        fetch(`https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/mesa/atualizarStatusMesa/${id}/${status}`, {
+        fetch(`<?= BASE_URL ?>mesa/atualizarStatusMesa/${id}/${status}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

@@ -124,7 +124,7 @@ class AuthController extends Controller
                         $mail->Subject = 'Bem-vindo(a) ao EXFÉ!';
 
                         // Link de exemplo: pode ser de ativação, confirmação ou só boas-vindas
-                        $link = 'http://agenciatipi02.smpsistema.com.br/devcycle/exfemobile/public/index.php?url=instalacao';
+                        $link = BASE_URL . 'index.php?url=instalacao';
 
                         $mensagem = "
                         <h2>Olá, $nome_cliente!</h2>

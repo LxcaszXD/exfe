@@ -7,8 +7,8 @@
                   <?php
 
                     $fotoFuncionario = $funcionario['foto_funcionario'];
-                    $fotoPath = "http://localhost/exfe/public/uploads/" . $fotoFuncionario;
-                    $fotoDefault = "http://localhost/exfe/public/assets/img/hero-bg3.png";
+                    $fotoPath = "<?= BASE_URL ?>uploads/" . $fotoFuncionario;
+                    $fotoDefault = "<?= BASE_URL ?>assets/img/hero-bg3.png";
 
                     $imagePath = (file_exists($_SERVER['DOCUMENT_ROOT'] . "/exfe/public/uploads/" . $fotoFuncionario) && !empty($fotoFuncionario))
                         ? $fotoPath

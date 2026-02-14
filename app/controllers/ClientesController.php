@@ -219,6 +219,8 @@ class ClientesController extends Controller
                     // ✅ Mensagem de Sucesso
                     $_SESSION['mensagem'] = "Cliente atualizado com sucesso!";
                     $_SESSION['tipo-msg'] = "sucesso";
+                    header('Location: ' . BASE_URL . 'clientes/listar');
+                    exit;
                 } else {
                     $dados['mensagem'] = "Erro ao atualizar cliente";
                     $dados['tipo-msg'] = "erro";
@@ -278,7 +280,7 @@ class ClientesController extends Controller
         }
     }
 
-    // 4- Método para desativar o serviço
+    // 4- Método para desativar o cliente
     public function desativar($id = null)
     {
         if ($id === null) {
@@ -299,16 +301,16 @@ class ClientesController extends Controller
 
             echo json_encode(['sucesso' => true]);
         } else {
-            $_SESSION['mensagem'] = "falha ao Desativar ";
+            $_SESSION['mensagem'] = "Falha ao Desativar Cliente";
 
             $_SESSION['tipo-msg'] = "erro";
 
 
-            echo json_encode(['sucesso' => false, "mensagem" => 'falha ao desativar Cliente']);
+            echo json_encode(['sucesso' => false, "mensagem" => 'Falha ao desativar Cliente']);
         }
     }
 
-    // 5- Método para sativar o serviço
+    // 5- Método para ativar o cliente
     public function ativar($id = null)
     {
         if ($id === null) {
@@ -323,18 +325,18 @@ class ClientesController extends Controller
         header('Content-Type: application/json');
 
         if ($resultado) {
-            $_SESSION['mensagem'] = "Cliente ativado com Sucesso";
+            $_SESSION['mensagem'] = "Cliente Ativado com Sucesso";
 
             $_SESSION['tipo-msg'] = "sucesso";
 
             echo json_encode(['sucesso' => true]);
         } else {
-            $_SESSION['mensagem'] = "falha ao Desativar ";
+            $_SESSION['mensagem'] = "Falha ao Ativar Cliente";
 
             $_SESSION['tipo-msg'] = "erro";
 
 
-            echo json_encode(['sucesso' => false, "mensagem" => 'falha ao ativar Cliente']);
+            echo json_encode(['sucesso' => false, "mensagem" => 'Falha ao ativar Cliente']);
         }
     }
 

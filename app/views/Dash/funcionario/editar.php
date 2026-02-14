@@ -70,7 +70,7 @@ if (isset($_SESSION['mensagem']) && isset($_SESSION['tipo-msg'])) {
     }
 
     .image-container {
-      
+
         border-radius: 50%;
         transition: all 0.3s ease;
         padding: 5px;
@@ -83,7 +83,7 @@ if (isset($_SESSION['mensagem']) && isset($_SESSION['tipo-msg'])) {
         align-items: center;
         justify-content: center;
         overflow: hidden;
-     
+
     }
 
     .image-container img {
@@ -91,8 +91,8 @@ if (isset($_SESSION['mensagem']) && isset($_SESSION['tipo-msg'])) {
         max-height: 100%;
         object-fit: contain;
         border-radius: 50%;
-           box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-           transition: .5s;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        transition: .5s;
     }
 
     .image-container:hover img {
@@ -100,16 +100,16 @@ if (isset($_SESSION['mensagem']) && isset($_SESSION['tipo-msg'])) {
     }
 </style>
 
-<form method="POST" action="<?php BASE_URL?>funcionarios/editar/<?php echo $funcionarios['id_funcionario']; ?>" enctype="multipart/form-data">
+<form method="POST" action="<?php echo BASE_URL; ?>funcionarios/editar/<?php echo $funcionarios['id_funcionario']; ?>" enctype="multipart/form-data">
     <div class="container-fluid py-4 glass-container">
         <div class="row">
             <!-- Imagem -->
             <div class="col-md-4 text-center mb-3 mb-md-0">
-                <div class="image-container" >
+                <div class="image-container">
                     <?php
                     $fotoFuncionario = $funcionarios['foto_funcionario'];
-                    $fotoPath = "https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/uploads/" . $fotoFuncionario;
-                    $fotoDefault = "https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/img/hero-bg3.png";
+                    $fotoPath = "<?= BASE_URL ?>uploads/" . $fotoFuncionario;
+                    $fotoDefault = "<?= BASE_URL ?>assets/img/hero-bg3.png";
                     $imagePath = (file_exists($_SERVER['DOCUMENT_ROOT'] . "/exfe/public/uploads/" . $fotoFuncionario) && !empty($fotoFuncionario)) ? $fotoPath : $fotoDefault;
                     ?>
                     <img src="<?php echo $imagePath ?>" alt="exfe Logo" class="img-fluid" id="preview-img" style="cursor:pointer; border-radius:12px;">
@@ -247,7 +247,7 @@ if (isset($_SESSION['mensagem']) && isset($_SESSION['tipo-msg'])) {
 
                         <div class="mt-4 text-center">
                             <button type="submit" class="btn btn-lg" style="background: #371406; color: white; font-weight: bold; border-radius: 12px;">Salvar</button>
-                            <a href="/devcycle/exfe/public/funcionarios" class="btn btn-lg" style="background: #371406; color: white; font-weight: bold; border-radius: 12px;">Cancelar</a>
+                            <a href="<?= BASE_URL ?>funcionarios/listar/" class="btn btn-lg" style="background: #371406; color: white; font-weight: bold; border-radius: 12px;">Cancelar</a>
                         </div>
                     </div>
                 </div>

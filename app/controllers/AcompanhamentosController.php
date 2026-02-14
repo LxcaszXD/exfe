@@ -197,82 +197,98 @@ class AcompanhamentosController extends Controller
     }
     
 
-    public function adicionar()
-    {
-        $dados = array();
-    
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $nome_acompanhamento      = filter_input(INPUT_POST, 'nome_acompanhamento', FILTER_SANITIZE_SPECIAL_CHARS);
-            $descricao_acompanhamento = filter_input(INPUT_POST, 'descricao_acompanhamento', FILTER_SANITIZE_SPECIAL_CHARS);
-            $alt_foto_acompanhamento  = filter_input(INPUT_POST, 'alt_foto_acompanhamento', FILTER_SANITIZE_SPECIAL_CHARS);
-            $preco_raw                = str_replace(['R$', '.', ','], ['', '', '.'], $_POST['preco_acompanhamento'] ?? '');
-            $preco_promocional_raw    = str_replace(['R$', '.', ','], ['', '', '.'], $_POST['preco_promocional_acompanhamento'] ?? '');
-    
-            $preco_acompanhamento          = floatval($preco_raw);
-            $preco_promocional_acompanhamento = floatval($preco_promocional_raw);
-    
-            $quantidade_acompanhamento    = intval($_POST['quantidade_acompanhamento'] ?? 0);
-            $tamanho_acompanhamento       = intval($_POST['tamanho_acompanhamento'] ?? 0);
-            $id_categoria_acompanhamento  = intval($_POST['id_categoria'] ?? 0);
-            $id_fornecedor_acompanhamento = intval($_POST['id_fornecedor'] ?? 0);
-    
-            $foto_acompanhamento = '';
-            if (isset($_FILES['foto_acompanhamento']) && $_FILES['foto_acompanhamento']['error'] === 0) {
-                $foto_acompanhamento = $_FILES['foto_acompanhamento']['name'];
-            }
-    
-            // Verifica campos obrigatórios
-            if ($nome_acompanhamento && $descricao_acompanhamento && $preco_acompanhamento !== false) {
-                $dadosAcompanhamento = array(
-                    'nome_acompanhamento'             => $nome_acompanhamento,
-                    'descricao_acompanhamento'        => $descricao_acompanhamento,
-                    'alt_foto_acompanhamento'         => $alt_foto_acompanhamento,
-                    'preco_acompanhamento'            => $preco_acompanhamento,
-                    'preco_promocional_acompanhamento'=> $preco_promocional_acompanhamento,
-                    'quantidade_acompanhamento'       => $quantidade_acompanhamento,
-                    'tamanho_acompanhamento'          => $tamanho_acompanhamento,
-                    'id_categoria_acompanhamento'     => $id_categoria_acompanhamento,
-                    'id_fornecedor_acompanhamento'    => $id_fornecedor_acompanhamento,
-                    'foto_acompanhamento'             => $foto_acompanhamento,
-                    'status_acompanhamento'           => 'Ativo'
-                );
-    
-                $id_acompanhamento = $this->acompanhamentosModel->addAcompanhamento($dadosAcompanhamento);
-    
-                if ($id_acompanhamento) {
-                    if (!empty($foto_acompanhamento)) {
-                        $arquivo = $this->uploadFoto($_FILES['foto_acompanhamento']);
-                        if ($arquivo) {
-                            $this->acompanhamentosModel->addFotoAcompanhamento($id_acompanhamento, $arquivo);
-                        }
+public function adicionar()
+{
+    $dados = array();
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // 1. Filtros e Tratamento de Preço
+        $nome_acompanhamento      = filter_input(INPUT_POST, 'nome_acompanhamento', FILTER_SANITIZE_SPECIAL_CHARS);
+        $descricao_acompanhamento = filter_input(INPUT_POST, 'descricao_acompanhamento', FILTER_SANITIZE_SPECIAL_CHARS);
+        $alt_foto_acompanhamento  = filter_input(INPUT_POST, 'alt_foto_acompanhamento', FILTER_SANITIZE_SPECIAL_CHARS);
+        
+        // Remove R$, pontos e troca vírgula por ponto para o banco
+        $preco_raw                = str_replace(['R$', '.', ','], ['', '', '.'], $_POST['preco_acompanhamento'] ?? '');
+        $preco_promocional_raw    = str_replace(['R$', '.', ','], ['', '', '.'], $_POST['preco_promocional_acompanhamento'] ?? '');
+
+        $preco_acompanhamento             = floatval($preco_raw);
+        $preco_promocional_acompanhamento = floatval($preco_promocional_raw);
+
+        $quantidade_acompanhamento     = intval($_POST['quantidade_acompanhamento'] ?? 0);
+        $tamanho_acompanhamento        = intval($_POST['tamanho_acompanhamento'] ?? 0);
+        
+        // Importante: certifique-se que no HTML os names são "id_categoria" e "id_fornecedor"
+        $id_categoria_acompanhamento   = intval($_POST['id_categoria'] ?? 0);
+        $id_fornecedor_acompanhamento  = intval($_POST['id_fornecedor'] ?? 0);
+
+        // 2. Tratamento da Foto (Nome do arquivo)
+        $foto_acompanhamento = '';
+        if (isset($_FILES['foto_acompanhamento']) && $_FILES['foto_acompanhamento']['error'] === 0) {
+            $foto_acompanhamento = $_FILES['foto_acompanhamento']['name']; 
+            // Nota: Idealmente você deve gerar um nome único aqui para evitar sobrescrita
+        }
+
+        // 3. Verifica campos obrigatórios
+        if ($nome_acompanhamento && $descricao_acompanhamento && $preco_acompanhamento !== false) {
+            
+            $dadosAcompanhamento = array(
+                'nome_acompanhamento'              => $nome_acompanhamento,
+                'descricao_acompanhamento'         => $descricao_acompanhamento,
+                'alt_foto_acompanhamento'          => $alt_foto_acompanhamento,
+                'preco_acompanhamento'             => $preco_acompanhamento,
+                'preco_promocional_acompanhamento' => $preco_promocional_acompanhamento,
+                'quantidade_acompanhamento'        => $quantidade_acompanhamento,
+                'tamanho_acompanhamento'           => $tamanho_acompanhamento,
+                
+                // --- CORREÇÃO AQUI ---
+                // Alterei as chaves para 'id_categoria' e 'id_fornecedor' para facilitar no Model
+                'id_categoria'                     => $id_categoria_acompanhamento,
+                'id_fornecedor'                    => $id_fornecedor_acompanhamento,
+                // ---------------------
+
+                'foto_acompanhamento'              => $foto_acompanhamento,
+                'status_acompanhamento'            => 'Ativo'
+            );
+
+            // Tenta inserir no banco
+            $id_acompanhamento = $this->acompanhamentosModel->addAcompanhamento($dadosAcompanhamento);
+
+            if ($id_acompanhamento) {
+                // Se inseriu o registro, faz o upload físico da imagem
+                if (!empty($foto_acompanhamento)) {
+                    // Aqui você chama a função que move o arquivo para a pasta
+                    $arquivo = $this->uploadFoto($_FILES['foto_acompanhamento']);
+                    
+                    // Se o nome do arquivo mudou durante o upload (ex: hash único), atualiza no banco
+                    if ($arquivo) {
+                        $this->acompanhamentosModel->addFotoAcompanhamento($id_acompanhamento, $arquivo);
                     }
-    
-                    $_SESSION['mensagem'] = "Acompanhamento cadastrado com sucesso";
-                    $_SESSION['tipo-msg'] = "sucesso";
-                    header('Location: ' . BASE_URL . 'acompanhamentos/listar');
-                    exit;
-                } else {
-                    $dados['mensagem'] = "Erro ao adicionar acompanhamento";
-                    $dados['tipo-msg'] = "erro";
                 }
+
+                $_SESSION['mensagem'] = "Acompanhamento cadastrado com sucesso";
+                $_SESSION['tipo-msg'] = "sucesso";
+                header('Location: ' . BASE_URL . '/acompanhamentos/listar'); // Adicionei a barra antes de acompanhamentos
+                exit;
             } else {
-                $dados['mensagem'] = "Preencha todos os campos obrigatórios";
+                $dados['mensagem'] = "Erro ao adicionar acompanhamento no banco de dados.";
                 $dados['tipo-msg'] = "erro";
             }
+        } else {
+            $dados['mensagem'] = "Preencha todos os campos obrigatórios";
+            $dados['tipo-msg'] = "erro";
         }
-    
-        // Carregar listas para o formulário
-        
-        $categoria = new Categoria();
-        $dados['categorias'] = $categoria->getListarCategorias();
-        
-        $fornecedor = new Fornecedor();
-        $dados['fornecedores'] = $fornecedor->getListarFornecedor();
-                
-        $dados['conteudo'] = 'dash/acompanhamento/adicionar';
-        $this->carregarViews('dash/dashboard', $dados);
     }
+
+    // Carregar listas para o formulário (Dropdowns)
+    $categoria = new Categoria();
+    $dados['categorias'] = $categoria->getListarCategorias();
     
+    $fornecedor = new Fornecedor();
+    $dados['fornecedores'] = $fornecedor->getListarFornecedor();
+            
+    $dados['conteudo'] = 'dash/acompanhamento/adicionar';
+    $this->carregarViews('dash/dashboard', $dados);
+}
 
     public function desativados()
     {

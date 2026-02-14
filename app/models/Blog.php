@@ -16,19 +16,18 @@ class Blog extends Model
     }
 
     public function listarAtivos()
-{
-    $sql = "SELECT b.*, f.nome_funcionario 
+    {
+        $sql = "SELECT b.*, f.nome_funcionario 
             FROM tbl_blog b 
             JOIN tbl_funcionario f ON b.id_funcionario = f.id_funcionario 
             WHERE b.status_blog = 'ativo'
             ORDER BY b.data_postagem_blog DESC";
 
-    $stmt = $this->db->prepare($sql);
-    $stmt->execute();
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
 
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public function listarAleatorios()
     {
@@ -43,19 +42,21 @@ class Blog extends Model
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function listarAleatoriosThree()
-    {
-        $sql = "SELECT b.*, f.nome_funcionario 
+public function listarAleatoriosThree()
+{
+    // Adicionamos a condição WHERE b.status_blog = 'Ativo'
+    $sql = "SELECT b.*, f.nome_funcionario 
             FROM tbl_blog b 
             JOIN tbl_funcionario f ON b.id_funcionario = f.id_funcionario 
+            WHERE b.status_blog = 'Ativo'
             ORDER BY RAND() 
             LIMIT 3";
 
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute();
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute();
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
     public function addBlog($dados)
     {
@@ -84,16 +85,19 @@ class Blog extends Model
     public function updateBlog($id, $dados)
     {
         $sql = "UPDATE tbl_blog SET 
-                titulo_blog = :titulo_blog,
-                conteudo_blog = :conteudo_blog,
-                status_blog = :status_blog,
-                id_funcionario = :id_funcionario
-            WHERE id_blog = :id_blog";
+                    titulo_blog = :titulo_blog,
+                    descricao_blog = :descricao_blog,
+                    data_postagem_blog = :data_postagem_blog,
+                    alt_foto_blog = :alt_foto_blog,
+                    status_blog = :status_blog,
+                    id_funcionario = :id_funcionario
+                WHERE id_blog = :id_blog";
 
         $stmt = $this->db->prepare($sql);
-
         $stmt->bindValue(':titulo_blog', $dados['titulo_blog']);
-        $stmt->bindValue(':conteudo_blog', $dados['conteudo_blog']);
+        $stmt->bindValue(':descricao_blog', $dados['descricao_blog']);
+        $stmt->bindValue(':data_postagem_blog', $dados['data_postagem_blog']);
+        $stmt->bindValue(':alt_foto_blog', $dados['alt_foto_blog']);
         $stmt->bindValue(':status_blog', $dados['status_blog']);
         $stmt->bindValue(':id_funcionario', $dados['id_funcionario']);
         $stmt->bindValue(':id_blog', $id, PDO::PARAM_INT);

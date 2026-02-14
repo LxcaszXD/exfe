@@ -82,7 +82,6 @@ class Funcionario extends Model
     }
 
     // 5 METODO DASHBOARD ADICONAR Funcionario
-
     public function addFuncionario($dados)
     {
         $sql = "INSERT INTO tbl_funcionario (
@@ -144,7 +143,6 @@ class Funcionario extends Model
     }
 
     // 6 Método para add FOTO GALERIA 
-
     public function addFotoFuncionario($id_funcionario, $arquivo)
     {
         $sql = "UPDATE tbl_funcionario 
@@ -159,49 +157,67 @@ class Funcionario extends Model
         return $stmt->execute();
     }
 
-
     public function updateFuncionario($id, $dados)
     {
+        // Processamento da Foto
+        if (isset($_FILES['foto_funcionario']) && $_FILES['foto_funcionario']['error'] === UPLOAD_ERR_OK) {
+            $ext = pathinfo($_FILES['foto_funcionario']['name'], PATHINFO_EXTENSION);
+            $nomeArquivo = 'foto_' . time() . '_' . uniqid() . '.' . $ext;
+            $caminhoDestino = 'uploads/' . $nomeArquivo;
+
+            if (move_uploaded_file($_FILES['foto_funcionario']['tmp_name'], $caminhoDestino)) {
+                $dados['foto_funcionario'] = $nomeArquivo;
+            }
+        }
+
+        // SQL utilizando placeholders idênticos às chaves do array $dados
         $sql = "UPDATE tbl_funcionario SET 
-                nome_funcionario =      :nome_funcionario,
-                foto_funcionario =      :foto_funcionario,
-                cpf_cnpj =              :cpf_cnpj,
-                email_funcionario =     :email_funcionario,
-                nasc_funcionario =      :nasc_funcionario,
-                senha_funcionario =      :senha_funcionario,
-                id_tipo_usuario =       :id_tipo_usuario,
-                status_funcionario =    :status_funcionario,
-                telefone_funcionario =  :telefone_funcionario,
-                endereco_funcionario =  :endereco_funcionario,
-                bairro_funcionario =    :bairro_funcionario,
-                cidade_funcionario =    :cidade_funcionario,
-                cargo_funcionario =     :cargo_funcionario,
-                cep_funcionario =     :cep_funcionario,
-                id_estado =             :id_estado
-                WHERE id_funcionario =  :id_funcionario";
+                nome_funcionario     = :nome_funcionario,
+                cpf_cnpj             = :cpf_cnpj,
+                email_funcionario    = :email_funcionario,
+                nasc_funcionario     = :nasc_funcionario,
+                senha_funcionario    = :senha_funcionario,
+                id_tipo_usuario      = :id_tipo_usuario,
+                status_funcionario   = :status_funcionario,
+                telefone_funcionario = :telefone_funcionario,
+                endereco_funcionario = :endereco_funcionario,
+                bairro_funcionario   = :bairro_funcionario,
+                cidade_funcionario   = :cidade_funcionario,
+                cargo_funcionario    = :cargo_funcionario,
+                cep_funcionario      = :cep_funcionario,
+                id_estado            = :id_estado";
+
+        if (!empty($dados['foto_funcionario'])) {
+            $sql .= ", foto_funcionario = :foto_funcionario";
+        }
+
+        $sql .= " WHERE id_funcionario = :id_funcionario";
 
         $stmt = $this->db->prepare($sql);
 
-        $stmt->bindValue(':nome_funcionario', $dados['nome_funcionario']);
-        $stmt->bindValue(':foto_funcionario', $dados['foto_funcionario']);
-        $stmt->bindValue(':cpf_cnpj', $dados['cpf_cnpj']);
-        $stmt->bindValue(':email_funcionario', $dados['email_funcionario']);
-        $stmt->bindValue(':nasc_funcionario', $dados['nasc_funcionario']);
-        $stmt->bindValue(':senha_funcionario', $dados['senha_funcionario']);
-        $stmt->bindValue(':id_tipo_usuario', $dados['id_tipo_usuario']);
-        $stmt->bindValue(':status_funcionario', $dados['status_funcionario']);
+        // BindValues dinâmicos baseados no array
+        $stmt->bindValue(':nome_funcionario',     $dados['nome_funcionario']);
+        $stmt->bindValue(':cpf_cnpj',             $dados['cpf_cnpj']);
+        $stmt->bindValue(':email_funcionario',    $dados['email_funcionario']);
+        $stmt->bindValue(':nasc_funcionario',     $dados['nasc_funcionario']);
+        $stmt->bindValue(':senha_funcionario',    $dados['senha_funcionario']);
+        $stmt->bindValue(':id_tipo_usuario',      $dados['id_tipo_usuario']);
+        $stmt->bindValue(':status_funcionario',   $dados['status_funcionario']);
         $stmt->bindValue(':telefone_funcionario', $dados['telefone_funcionario']);
         $stmt->bindValue(':endereco_funcionario', $dados['endereco_funcionario']);
-        $stmt->bindValue(':bairro_funcionario', $dados['bairro_funcionario']);
-        $stmt->bindValue(':cidade_funcionario', $dados['cidade_funcionario']);
-        $stmt->bindValue(':cargo_funcionario', $dados['cargo_funcionario']);
-        $stmt->bindValue(':cep_funcionario', $dados['cep_funcionario']);
-        $stmt->bindValue(':id_estado', $dados['id_estado']);
-        $stmt->bindValue(':id_funcionario', $id);
+        $stmt->bindValue(':bairro_funcionario',   $dados['bairro_funcionario']);
+        $stmt->bindValue(':cidade_funcionario',   $dados['cidade_funcionario']);
+        $stmt->bindValue(':cargo_funcionario',    $dados['cargo_funcionario']);
+        $stmt->bindValue(':cep_funcionario',      $dados['cep_funcionario']);
+        $stmt->bindValue(':id_estado',            $dados['id_estado']);
+        $stmt->bindValue(':id_funcionario',       $id);
+
+        if (!empty($dados['foto_funcionario'])) {
+            $stmt->bindValue(':foto_funcionario', $dados['foto_funcionario']);
+        }
 
         return $stmt->execute();
     }
-
 
     public function getFuncionarioById($id)
     {
@@ -215,7 +231,6 @@ class Funcionario extends Model
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-
     // Desativar Funcionario 
     public function desativarFuncionario($id)
     {
@@ -227,7 +242,6 @@ class Funcionario extends Model
     }
 
     // ativar Funcionario 
-
     public function ativarFuncionario($id)
     {
 
@@ -236,8 +250,6 @@ class Funcionario extends Model
         $stmt->bindValue(':id_funcionario', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
-
-
 
     public function buscarPorNome($nome, $status = '')
     {
@@ -255,6 +267,4 @@ class Funcionario extends Model
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    
 }

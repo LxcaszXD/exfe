@@ -109,32 +109,41 @@ class BlogController extends Controller
         $dados['conteudo'] = 'dash/blog/editar';
 
         if ($id === null) {
-            header('Location: /public/blog/listar');
+            header('Location: ' . BASE_URL . 'blog/listar');
             exit;
         }
 
         $blogModel = new Blog();
+        $funcionarioModel = new Funcionario();
+
+        // Busca dados do funcionário logado pelo email da sessão
+        $dados['funcionario_logado'] = $funcionarioModel->buscarFuncionario($_SESSION['userEmail']);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $titulo_blog       = filter_input(INPUT_POST, 'titulo_blog', FILTER_SANITIZE_SPECIAL_CHARS);
-            $conteudo_blog     = filter_input(INPUT_POST, 'conteudo_blog', FILTER_SANITIZE_SPECIAL_CHARS);
-            $status_blog       = filter_input(INPUT_POST, 'status_blog', FILTER_SANITIZE_SPECIAL_CHARS);
-            $id_funcionario    = filter_input(INPUT_POST, 'id_funcionario', FILTER_SANITIZE_NUMBER_INT);
+            // Captura e sanitiza os inputs
+            $titulo_blog    = filter_input(INPUT_POST, 'titulo_blog', FILTER_SANITIZE_SPECIAL_CHARS);
+            $descricao_blog = filter_input(INPUT_POST, 'descricao_blog', FILTER_SANITIZE_SPECIAL_CHARS);
+            $status_blog    = filter_input(INPUT_POST, 'status_blog', FILTER_SANITIZE_SPECIAL_CHARS);
+            $alt_foto_blog  = filter_input(INPUT_POST, 'alt_foto_blog', FILTER_SANITIZE_SPECIAL_CHARS);
+            $data_postagem  = filter_input(INPUT_POST, 'data_postagem_blog', FILTER_SANITIZE_SPECIAL_CHARS);
 
-            // Validar campos
-            if ($titulo_blog && $conteudo_blog && $status_blog && $id_funcionario) {
-                // Monta array
+            // Pega o ID do funcionário logado buscado no início
+            $id_funcionario = $dados['funcionario_logado']['id_funcionario'];
+
+            if ($titulo_blog && $descricao_blog && $id_funcionario) {
                 $dadosBlog = array(
-                    'titulo_blog'    => $titulo_blog,
-                    'conteudo_blog'  => $conteudo_blog,
-                    'status_blog'    => $status_blog,
-                    'id_funcionario' => $id_funcionario
+                    'titulo_blog'        => $titulo_blog,
+                    'descricao_blog'     => $descricao_blog,
+                    'status_blog'        => $status_blog,
+                    'alt_foto_blog'      => $alt_foto_blog,
+                    'data_postagem_blog' => $data_postagem,
+                    'id_funcionario'     => $id_funcionario
                 );
 
-                // Atualiza no banco
+                // Atualiza dados textuais
                 $blogModel->updateBlog($id, $dadosBlog);
 
-                // Upload da imagem
+                // Trata upload de imagem
                 if (isset($_FILES['foto_blog']) && $_FILES['foto_blog']['error'] == 0) {
                     $arquivo = $this->uploadFoto($_FILES['foto_blog']);
                     if ($arquivo) {
@@ -144,7 +153,7 @@ class BlogController extends Controller
 
                 $_SESSION['mensagem'] = "Blog atualizado com sucesso!";
                 $_SESSION['tipo-msg'] = "sucesso";
-                header('Location: /public/blog/listar');
+                header('Location: ' . BASE_URL . 'blog/listar');
                 exit;
             } else {
                 $dados['mensagem'] = "Preencha todos os campos obrigatórios.";
@@ -152,19 +161,12 @@ class BlogController extends Controller
             }
         }
 
-        // Dados do blog a ser editado
+        // Carrega dados atuais para preencher o formulário
         $dados['blog'] = $blogModel->getBlogById($id);
 
-        // Funcionário logado
-        $funcionario = new Funcionario();
-        $dados['funcionario'] = $funcionario->buscarFuncionario($_SESSION['userEmail']);
-
-        // Renderiza view correta
-        if ($_SESSION['id_tipo_usuario'] == '1') {
-            $this->carregarViews('dash/dashboard', $dados);
-        } else {
-            $this->carregarViews('dash/dashboard-funcionario', $dados);
-        }
+        // Renderiza a view baseada no tipo de usuário
+        $view = ($_SESSION['id_tipo_usuario'] == '1') ? 'dash/dashboard' : 'dash/dashboard-funcionario';
+        $this->carregarViews($view, $dados);
     }
 
     // Desativar Blog

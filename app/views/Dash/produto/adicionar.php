@@ -93,7 +93,7 @@ if (isset($_SESSION['mensagem']) && isset($_SESSION['tipo-msg'])) {
 
           <div class="mt-4 text-center">
             <button type="submit" class="btn px-5 py-2 me-2 fw-bold" style="background: #371406; color:rgb(255, 255, 255); border-radius: 12px;">Salvar</button>
-            <a href="<?php echo BASE_URL ?>cafes" class="btn px-5 py-2 fw-bold" style="background: #371406; color:rgb(255, 255, 255); border-radius: 12px;">Cancelar</a>
+            <a href="<?php echo BASE_URL ?>cafes/listar/" class="btn px-5 py-2 fw-bold" style="background: #371406; color:rgb(255, 255, 255); border-radius: 12px;">Cancelar</a>
           </div>
         </div>
       </div>

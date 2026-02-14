@@ -73,7 +73,6 @@ class Avaliacao extends Model
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-
     public function avaliacaoCliente($id)
     {
         $sql = "SELECT a.id_avaliacao, a.id_cliente, a.id_produto,
@@ -88,7 +87,6 @@ class Avaliacao extends Model
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
 
     public function addAvaliacao($dados)
     {
@@ -107,7 +105,6 @@ class Avaliacao extends Model
         return $stmt->execute();
     }
 
-
     public function getAvaliacaoById($id)
     {
 
@@ -119,7 +116,6 @@ class Avaliacao extends Model
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-
 
     public function updateAvaliacao($id, $dados)
     {

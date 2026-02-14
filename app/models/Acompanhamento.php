@@ -98,31 +98,35 @@ class Acompanhamento extends Model
 
     public function addAcompanhamento($dados)
     {
+        // 1. Adicionei id_categoria e id_fornecedor na lista de colunas
         $sql = "INSERT INTO tbl_acompanhamento (
-                    nome_acompanhamento,
-                    descricao_acompanhamento,
-                    alt_foto_acompanhamento,
-                    preco_acompanhamento,
-                    preco_promocional_acompanhamento,
-                    quantidade_acompanhamento,
-                    tamanho_acompanhamento,
-                    foto_acompanhamento,
-                    status_acompanhamento
-                ) VALUES (
-                    :nome_acompanhamento,
-                    :descricao_acompanhamento,
-                    :alt_foto_acompanhamento,
-                    :preco_acompanhamento,
-                    :preco_promocional_acompanhamento,
-                    :quantidade_acompanhamento,
-                    :tamanho_acompanhamento,
-                    :id_categoria_acompanhamento,
-                    :id_fornecedor_acompanhamento,
-                    :foto_acompanhamento,
-                    :status_acompanhamento
-                )";
+                nome_acompanhamento,
+                descricao_acompanhamento,
+                alt_foto_acompanhamento,
+                preco_acompanhamento,
+                preco_promocional_acompanhamento,
+                quantidade_acompanhamento,
+                tamanho_acompanhamento,
+                id_categoria,
+                id_fornecedor,
+                foto_acompanhamento,
+                status_acompanhamento
+            ) VALUES (
+                :nome_acompanhamento,
+                :descricao_acompanhamento,
+                :alt_foto_acompanhamento,
+                :preco_acompanhamento,
+                :preco_promocional_acompanhamento,
+                :quantidade_acompanhamento,
+                :tamanho_acompanhamento,
+                :id_categoria_acompanhamento,
+                :id_fornecedor_acompanhamento,
+                :foto_acompanhamento,
+                :status_acompanhamento
+            )";
 
         $stmt = $this->db->prepare($sql);
+
         $stmt->bindValue(':nome_acompanhamento', $dados['nome_acompanhamento']);
         $stmt->bindValue(':descricao_acompanhamento', $dados['descricao_acompanhamento']);
         $stmt->bindValue(':alt_foto_acompanhamento', $dados['alt_foto_acompanhamento']);
@@ -130,6 +134,13 @@ class Acompanhamento extends Model
         $stmt->bindValue(':preco_promocional_acompanhamento', $dados['preco_promocional_acompanhamento']);
         $stmt->bindValue(':quantidade_acompanhamento', $dados['quantidade_acompanhamento']);
         $stmt->bindValue(':tamanho_acompanhamento', $dados['tamanho_acompanhamento']);
+
+        // 2. Adicionei os binds que faltavam
+        // IMPORTANTE: Verifique se no seu array $dados as chaves são 'id_categoria' e 'id_fornecedor'
+        // Se no formulário estiver 'id_categoria_acompanhamento', altere abaixo.
+        $stmt->bindValue(':id_categoria_acompanhamento', $dados['id_categoria']);
+        $stmt->bindValue(':id_fornecedor_acompanhamento', $dados['id_fornecedor']);
+
         $stmt->bindValue(':foto_acompanhamento', $dados['foto_acompanhamento']);
         $stmt->bindValue(':status_acompanhamento', $dados['status_acompanhamento']);
 

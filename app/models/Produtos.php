@@ -12,7 +12,7 @@ class Produtos extends Model
             FROM tbl_produto AS p
             INNER JOIN tbl_categoria AS c ON p.id_categoria = c.id_categoria
             INNER JOIN tbl_fornecedor AS f ON p.id_fornecedor = f.id_fornecedor
-            WHERE TRIM(p.status_produto) = 'ativo'
+            WHERE TRIM(p.status_produto) = 'Ativo'
             ORDER BY RAND()
             LIMIT :quantidade";
 
@@ -159,7 +159,7 @@ class Produtos extends Model
             f.nome_fornecedor AS nome_fornecedor
             FROM tbl_produto AS p1 INNER JOIN (
             SELECT MIN(id_produto) AS id_produto
-            FROM tbl_produto WHERE TRIM(status_produto) = 'ativo'
+            FROM tbl_produto WHERE TRIM(status_produto) = 'Ativo'
             GROUP BY nome_produto) AS p2 ON p1.id_produto = p2.id_produto
             INNER JOIN tbl_categoria AS c ON p1.id_categoria = c.id_categoria
             INNER JOIN tbl_fornecedor AS f ON p1.id_fornecedor = f.id_fornecedor

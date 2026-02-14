@@ -47,12 +47,12 @@ if (isset($_SESSION['mensagem']) && isset($_SESSION['tipo-msg'])) {
 
                                         if ($linha['foto_produto'] != "") {
                                             if (file_exists($caminhoArquivo)) {
-                                                echo ("http://localhost/exfe/public/uploads/" . htmlspecialchars($linha['foto_produto'], ENT_QUOTES, 'UTF-8'));
+                                                echo ("<?= BASE_URL ?>uploads/" . htmlspecialchars($linha['foto_produto'], ENT_QUOTES, 'UTF-8'));
                                             } else {
-                                                echo ("http://localhost/exfe/public/uploads/produto/sem-foto-produto.jpg");
+                                                echo ("<?= BASE_URL ?>uploads/produto/sem-foto-produto.jpg");
                                             }
                                         } else {
-                                            echo ("http://localhost/exfe/public/uploads/produto/sem-foto-produto.jpg");
+                                            echo ("<?= BASE_URL ?>uploads/produto/sem-foto-produto.jpg");
                                         }
                                         ?>" alt="" class="rounded-circle" style="width: 50px; height: 50px;">
                         </td>
@@ -62,7 +62,7 @@ if (isset($_SESSION['mensagem']) && isset($_SESSION['tipo-msg'])) {
                         <td><?php echo htmlspecialchars($linha['id_categoria']); ?></td>
                         <td><?php echo htmlspecialchars($linha['nome_fornecedor']); ?></td>
                         <td>
-                            <a href="http://localhost/exfe/public/produtos/editar/<?php echo $linha['id_produto']; ?>" title="Editar">
+                            <a href="<?= BASE_URL ?>produtos/editar/<?php echo $linha['id_produto']; ?>" title="Editar">
                                 <i class="fa fa-pencil-alt" style="font-size: 20px; color: #9a5c1f;"></i>
                             </a>
                         </td>
@@ -79,7 +79,7 @@ if (isset($_SESSION['mensagem']) && isset($_SESSION['tipo-msg'])) {
 
     <div class="text-center mt-4">
         <h3 style="color: #9a5c1fad;">Não encontrou o produto? Cadastre abaixo</h3>
-        <a href="http://localhost/exfe/public/produtos/adicionar/" class="btn fw-bold px-4 py-2" style="background:#9a5c1fad; color: #ffffff; border-radius: 8px;">
+        <a href="<?= BASE_URL ?>produtos/adicionar/" class="btn fw-bold px-4 py-2" style="background:#9a5c1fad; color: #ffffff; border-radius: 8px;">
             Adicionar Produto
         </a>
     </div>
@@ -135,7 +135,7 @@ if (isset($_SESSION['mensagem']) && isset($_SESSION['tipo-msg'])) {
     });
 
     function desativarProduto(idProduto) {
-        fetch(`http://localhost/exfe/public/produtos/desativar/${idProduto}`, {
+        fetch(`<?= BASE_URL ?>produtos/desativar/${idProduto}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

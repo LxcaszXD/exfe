@@ -138,7 +138,7 @@ class MesaController extends Controller
                     // Mensagem de SUCESSO
                     $_SESSION['mensagem'] = "Mesa cadastrada com sucesso!";
                     $_SESSION['tipo-msg'] = "sucesso";
-                    header('Location: https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/mesa/listar');
+                    header('Location: ' . BASE_URL . 'mesa/listar');
                     exit;
                 } else {
                     // Mensagem de erro ao adicionar a mesa
@@ -168,7 +168,7 @@ class MesaController extends Controller
 
         // Redireciona se o ID for nulo
         if ($id === null) {
-            header('Location: https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/mesa/listar');
+            header('Location: ' . BASE_URL . 'mesa/listar');
             exit;
         }
 
@@ -179,7 +179,7 @@ class MesaController extends Controller
         } else {
             $_SESSION['mensagem'] = "Mesa não encontrada";
             $_SESSION['tipo-msg'] = "erro";
-            header('Location: https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/mesa/listar');
+            header('Location: ' . BASE_URL . 'mesa/listar');
             exit;
         }
 
@@ -212,7 +212,7 @@ class MesaController extends Controller
                 if ($atualizado) {
                     $_SESSION['mensagem'] = "Mesa atualizada com sucesso";
                     $_SESSION['tipo-msg'] = "sucesso";
-                    header('Location: https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/mesa/listar');
+                    header('Location: ' . BASE_URL . 'mesa/listar');
                     exit;
                 } else {
                     $dados['mensagem'] = "Erro ao atualizar mesa";

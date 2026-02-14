@@ -113,32 +113,22 @@ html {
   scroll-behavior: smooth;
   font-family: "Poppis", sans-serif;
 }
-html body.light-mode {
-  /* #region dashboard  */
-  /* Faz o dropdown ocupar largura total e parecer parte do menu lateral */
-  /* Estilização do sidenav */
-  /* Ícone para fechar o menu */
-  /* Marca do topo */
-  /* Linha divisória */
-  /* Links ativos */
-  /* Estilo dos ícones de cada item */
-  /* Estilo geral dos links */
-  /* Título das seções */
-  /* Submenus */
-  /*  #endregion  */
-  background-image: url("https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/img/hero-bg.png");
-  background-attachment: fixed;
-  background-position: center;
-}
 html body.light-mode h2 {
   color: #371406;
 }
 html body.light-mode p {
   color: #b3b3b3;
 }
+html body.light-mode {
+  /* #region dashboard  */
+  /* Faz o dropdown ocupar largura total e parecer parte do menu lateral */
+}
 html body.light-mode .dropdown-menu.show-on-click {
   position: static;
   float: none;
+}
+html body.light-mode {
+  /* Estilização do sidenav */
 }
 html body.light-mode .bg-dash {
   background: linear-gradient(to top, #f2e0db 1.57%, #fff 128.95%);
@@ -149,21 +139,36 @@ html body.light-mode #sidenav-main {
   box-shadow: 0 4px 12px rgba(57, 24, 10, 0.15);
   border: 2px solid #f0c9a9;
 }
+html body.light-mode {
+  /* Ícone para fechar o menu */
+}
 html body.light-mode #iconSidenav {
   color: #9e675f;
   opacity: 0.5;
 }
+html body.light-mode {
+  /* Marca do topo */
+}
 html body.light-mode .navbar-brand span {
   color: #371406;
+}
+html body.light-mode {
+  /* Linha divisória */
 }
 html body.light-mode hr.horizontal {
   border-color: #d3c2b5;
   opacity: 0.7;
 }
+html body.light-mode {
+  /* Links ativos */
+}
 html body.light-mode .nav-link.active {
   color: #9e675f;
   background-color: #fdf6ee;
   border-radius: 0.5rem;
+}
+html body.light-mode {
+  /* Estilo dos ícones de cada item */
 }
 html body.light-mode .nav-link .icon {
   background-color: #ffd8b9;
@@ -173,14 +178,23 @@ html body.light-mode .nav-link i {
   color: #371406;
   opacity: 0.9;
 }
+html body.light-mode {
+  /* Estilo geral dos links */
+}
 html body.light-mode .nav-link-text,
 html body.light-mode .nav-link {
   color: #371406;
   border-radius: 0.5rem;
 }
+html body.light-mode {
+  /* Título das seções */
+}
 html body.light-mode .text-uppercase.text-xs.font-weight-bolder {
   color: #9e675f;
   opacity: 0.85;
+}
+html body.light-mode {
+  /* Submenus */
 }
 html body.light-mode .submenu-custom .nav-link {
   color: #371406;
@@ -188,6 +202,12 @@ html body.light-mode .submenu-custom .nav-link {
 }
 html body.light-mode .submenu-custom i {
   color: #371406;
+}
+html body.light-mode {
+  /*  #endregion  */
+  background-image: url("../img/hero-bg.png");
+  background-attachment: fixed;
+  background-position: center;
 }
 html body.light-mode #loader {
   display: flex;
@@ -286,7 +306,7 @@ html body.light-mode .toggle::after {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background-image: url("https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/img/sun.png");
+  background-image: url("../img/sun.png");
   background-position: center;
   background-size: cover;
   box-shadow: 0 1px 2px rgba(44, 44, 44, 0.2);
@@ -300,8 +320,7 @@ html body.light-mode input[type=checkbox]:checked + .toggle::after {
 }
 html body.light-mode .site {
   background: rgba(255, 255, 255, 0.1);
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 html body.light-mode .site a {
@@ -309,8 +328,7 @@ html body.light-mode .site a {
 }
 html body.light-mode header.scroll {
   background: rgba(255, 255, 255, 0.1);
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 html body.light-mode header.scroll a {
@@ -354,10 +372,9 @@ html body.light-mode .footer {
   background: linear-gradient(to top, #f2e0db 1.5%, #fff 100%);
 }
 html body.dark-mode {
-  background-image: url("https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/img/hero-bg2.png");
+  background-image: url("../img/hero-bg2.png");
   background-attachment: fixed;
   background-position: center;
-  color: #f5f5f5;
 }
 html body.dark-mode .dropdown-menu.show-on-click {
   position: static;
@@ -507,8 +524,7 @@ html body.dark-mode .one {
 }
 html body.dark-mode .site {
   background: rgba(53, 28, 11, 0.1);
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 html body.dark-mode .site a {
@@ -519,8 +535,7 @@ html body.dark-mode .site a:hover {
 }
 html body.dark-mode header.scroll {
   background: rgba(255, 255, 255, 0.1);
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 html body.dark-mode input[type=checkbox] {
@@ -547,7 +562,7 @@ html body.dark-mode .toggle::after {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background-image: url("https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/img/moon.png");
+  background-image: url("../img/moon.png");
   background-position: center;
   background-size: cover;
   box-shadow: 0 1px 2px rgba(44, 44, 44, 0.2);
@@ -560,6 +575,9 @@ html body.dark-mode input[type=checkbox]:checked + .toggle::after {
   transform: translateX(20px) scale(1.02);
 }
 html body.dark-mode h2 {
+  color: #f5f5f5;
+}
+html body.dark-mode {
   color: #f5f5f5;
 }
 html body.dark-mode #banner span {
@@ -641,9 +659,6 @@ html body header .one .info01 .card {
   gap: 20px;
   border: none;
   /* for all social containers*/
-  /* instagram*/
-  /* Whatsapp*/
-  /* facebook*/
 }
 html body header .one .info01 .card .socialContainer {
   width: 35px;
@@ -656,15 +671,24 @@ html body header .one .info01 .card .socialContainer {
   transition-duration: 0.3s;
   border-radius: 30px;
 }
+html body header .one .info01 .card {
+  /* instagram*/
+}
 html body header .one .info01 .card .containerOne:hover {
   background-color: #d62976;
   transition-duration: 0.3s;
   transform: scale(1.2);
 }
+html body header .one .info01 .card {
+  /* Whatsapp*/
+}
 html body header .one .info01 .card .containerTwo:hover {
   background-color: #128c7e;
   transition-duration: 0.3s;
   transform: scale(1.2);
+}
+html body header .one .info01 .card {
+  /* facebook*/
 }
 html body header .one .info01 .card .containerThree:hover {
   background-color: #0072b1;
@@ -1073,7 +1097,7 @@ html body .modal .container.right-panel-active .overlay-container {
   transform: translateX(-100%);
 }
 html body .modal .overlay {
-  background-image: url("https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/assets/img/hero-bg2.png");
+  background-image: url("../img/hero-bg2.png");
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -1133,8 +1157,6 @@ html body .modal .card {
   gap: 20px;
   border: none;
   /* for all social containers*/
-  /* google*/
-  /* apple*/
 }
 html body .modal .card .socialContainer {
   width: 45px;
@@ -1147,10 +1169,16 @@ html body .modal .card .socialContainer {
   transition-duration: 0.3s;
   border-radius: 30px;
 }
+html body .modal .card {
+  /* google*/
+}
 html body .modal .card .containerOne:hover {
   background-color: #d62937;
   transition-duration: 0.3s;
   transform: scale(1.2);
+}
+html body .modal .card {
+  /* apple*/
 }
 html body .modal .card .containerTwo:hover {
   background-color: #5b565c;
@@ -3312,7 +3340,7 @@ html body main #blog .blogContainer .blogCont {
   justify-content: center;
   display: flex !important;
   width: 430px;
-  height: 600px;
+  height: 500px;
   justify-content: flex-start;
   flex-direction: column;
   gap: 30px;
@@ -3729,14 +3757,13 @@ html body main #blogPage .blogEvents .blogEventsContent .blogEventsRedes .blogEv
   align-items: center;
   justify-content: center;
   gap: 10px;
-  /* for all social containers*/
-  /* instagram*/
-  /* Whatsapp*/
-  /* facebook*/
 }
 html body main #blogPage .blogEvents .blogEventsContent .blogEventsRedes .blogEventsRedesItems h3 {
   font-size: 1.3em;
   margin: 0px;
+}
+html body main #blogPage .blogEvents .blogEventsContent .blogEventsRedes .blogEventsRedesItems {
+  /* for all social containers*/
 }
 html body main #blogPage .blogEvents .blogEventsContent .blogEventsRedes .blogEventsRedesItems .socialContainer {
   width: 35px;
@@ -3749,15 +3776,24 @@ html body main #blogPage .blogEvents .blogEventsContent .blogEventsRedes .blogEv
   transition-duration: 0.3s;
   border-radius: 30px;
 }
+html body main #blogPage .blogEvents .blogEventsContent .blogEventsRedes .blogEventsRedesItems {
+  /* instagram*/
+}
 html body main #blogPage .blogEvents .blogEventsContent .blogEventsRedes .blogEventsRedesItems .containerOne:hover {
   background-color: #d62976;
   transition-duration: 0.3s;
   transform: scale(1.2);
 }
+html body main #blogPage .blogEvents .blogEventsContent .blogEventsRedes .blogEventsRedesItems {
+  /* Whatsapp*/
+}
 html body main #blogPage .blogEvents .blogEventsContent .blogEventsRedes .blogEventsRedesItems .containerTwo:hover {
   background-color: #128c7e;
   transition-duration: 0.3s;
   transform: scale(1.2);
+}
+html body main #blogPage .blogEvents .blogEventsContent .blogEventsRedes .blogEventsRedesItems {
+  /* facebook*/
 }
 html body main #blogPage .blogEvents .blogEventsContent .blogEventsRedes .blogEventsRedesItems .containerThree:hover {
   background-color: #0072b1;
@@ -4428,8 +4464,6 @@ html body main #cardapio-tv {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Reset animation when slide is not active */
-  /* Scroll personalizado (opcional) */
 }
 html body main #cardapio-tv .swiper {
   width: 100%;
@@ -4455,6 +4489,9 @@ html body main #cardapio-tv .cafes-container {
   align-items: center;
   position: relative;
   z-index: 2;
+}
+html body main #cardapio-tv {
+  /* Reset animation when slide is not active */
 }
 html body main #cardapio-tv .swiper-slide:not(.swiper-slide-active) .card-cafe {
   animation: none !important;
@@ -4503,8 +4540,7 @@ html body main #cardapio-tv .cafe-inner .row:last-child h2 {
 }
 html body main #cardapio-tv .card-cafe {
   background: linear-gradient(to bottom, rgba(64, 41, 32, 0.2862745098) 1.57%, rgba(119, 74, 56, 0.5450980392) 128.95%);
-  -webkit-backdrop-filter: blur(12px);
-          backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   border-radius: 16px;
   padding: 1.5rem;
   text-align: center;
@@ -4538,6 +4574,9 @@ html body main #cardapio-tv .card-cafe h4 span {
   display: inline-block;
   color: white !important;
 }
+html body main #cardapio-tv {
+  /* Scroll personalizado (opcional) */
+}
 html body main #cardapio-tv .cafe-inner::-webkit-scrollbar {
   width: 8px;
 }
@@ -4567,8 +4606,7 @@ html body main #cardapio-tv .cafe-menu article {
   flex-direction: column;
   color: white;
   background: linear-gradient(to bottom, rgba(64, 41, 32, 0.2862745098) 1.57%, rgba(119, 74, 56, 0.5450980392) 128.95%);
-  -webkit-backdrop-filter: blur(15px);
-          backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
   border-radius: 12px;
 }
 html body main #cardapio-tv .cafe-menu article ul {
@@ -4665,8 +4703,7 @@ html body main #cardapio-tv .paes-menu article {
   flex-direction: column;
   color: white;
   background: linear-gradient(to bottom, rgba(64, 41, 32, 0.2862745098) 1.57%, rgba(119, 74, 56, 0.5450980392) 128.95%);
-  -webkit-backdrop-filter: blur(15px);
-          backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
   border-radius: 12px;
 }
 html body main #cardapio-tv .paes-menu article ul {
@@ -5589,6 +5626,7 @@ html body main #cardapio-tv .paes-menu figure img {
 }
 html body .footer {
   margin-top: 5%;
+  padding-top: 1%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -5616,8 +5654,8 @@ html body .footer .footer-container .footer-logo h3 {
   width: 400px;
 }
 html body .footer .footer-container .footer-logo img {
-  width: 250px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   margin-bottom: 20px;
 }
 html body .footer .footer-container .footer-links {
@@ -5665,9 +5703,6 @@ html body .footer .footer-container .footer-links .footer-section .card {
   gap: 20px;
   border: none;
   /* for all social containers*/
-  /* instagram*/
-  /* Whatsapp*/
-  /* facebook*/
 }
 html body .footer .footer-container .footer-links .footer-section .card .socialContainer {
   width: 35px;
@@ -5680,15 +5715,24 @@ html body .footer .footer-container .footer-links .footer-section .card .socialC
   transition-duration: 0.3s;
   border-radius: 30px;
 }
+html body .footer .footer-container .footer-links .footer-section .card {
+  /* instagram*/
+}
 html body .footer .footer-container .footer-links .footer-section .card .containerOne:hover {
   background-color: #d62976;
   transition-duration: 0.3s;
   transform: scale(1.2);
 }
+html body .footer .footer-container .footer-links .footer-section .card {
+  /* Whatsapp*/
+}
 html body .footer .footer-container .footer-links .footer-section .card .containerTwo:hover {
   background-color: #128c7e;
   transition-duration: 0.3s;
   transform: scale(1.2);
+}
+html body .footer .footer-container .footer-links .footer-section .card {
+  /* facebook*/
 }
 html body .footer .footer-container .footer-links .footer-section .card .containerThree:hover {
   background-color: #0072b1;
@@ -5784,8 +5828,7 @@ html body .footer .chat-boot #chat-container {
   background-size: 400% 400%;
   animation: gradientAnimation 10s ease infinite;
   box-shadow: 0 8px 32px 0 rgba(94, 60, 45, 0.5);
-  -webkit-backdrop-filter: blur(10.5px);
-          backdrop-filter: blur(10.5px);
+  backdrop-filter: blur(10.5px);
   z-index: 99999;
   text-align: left;
   margin: 3%;

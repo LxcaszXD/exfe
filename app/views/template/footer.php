@@ -2,7 +2,7 @@
   <div class="footer-container">
     <div class="footer-logo">
       <a href="index.html">
-        <img src="assets/img/" alt="Logo" />
+        <img src="<?php echo BASE_URL ?>assets/img/logo_exfe.png" alt="Logo" />
       </a>
       <div class="contato">
         <h3>

@@ -128,7 +128,7 @@ if (isset($_SESSION['mensagem']) && isset($_SESSION['tipo-msg'])) {
     document.getElementById('btnConfirmarDesativar').addEventListener('click', function () {
         const id = document.getElementById('idContatoDesativar').value;
         if (id) {
-            fetch(`https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/contato/desativar/${id}`, {
+            fetch(`<?= BASE_URL ?>contato/desativar/${id}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' }
             })
@@ -154,7 +154,7 @@ if (isset($_SESSION['mensagem']) && isset($_SESSION['tipo-msg'])) {
     document.getElementById('btnConfirmarAtivar').addEventListener('click', function () {
         const id = document.getElementById('idContatoAtivar').value;
         if (id) {
-            fetch(`https://agenciatipi02.smpsistema.com.br/devcycle/exfe/public/contato/ativar/${id}`, {
+            fetch(`<?= BASE_URL ?>contato/ativar/${id}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' }
             })

@@ -104,12 +104,12 @@
 
                         if ($cliente['foto_cliente'] != "") {
                           if (file_exists($caminhoArquivo)) {
-                            echo ("http://localhost/exfe/public/uploads/" . htmlspecialchars($cliente['foto_cliente'], ENT_QUOTES, 'UTF-8'));
+                            echo ("<?= BASE_URL ?>uploads/" . htmlspecialchars($cliente['foto_cliente'], ENT_QUOTES, 'UTF-8'));
                           } else {
-                            echo ("http://localhost/exfe/public/uploads/cliente/sem-foto-cliente.jpg");
+                            echo ("<?= BASE_URL ?>uploads/cliente/sem-foto-cliente.jpg");
                           }
                         } else {
-                          echo ("http://localhost/exfe/public/uploads/cliente/sem-foto-cliente.jpg");
+                          echo ("<?= BASE_URL ?>uploads/cliente/sem-foto-cliente.jpg");
                         }
                         ?>" class="rounded-circle img-fluid border border-2 border-white">
               </a>
