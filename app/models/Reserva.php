@@ -38,6 +38,8 @@ class Reserva extends Model
         return $stmt->execute();
     }
 
+
+
     public function getReservasByCliente($id_cliente)
     {
         $sql = "SELECT r.*, m.numero_mesa, m.capacidade 
@@ -87,25 +89,44 @@ class Reserva extends Model
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-public function atualizarStatus($id, $status)
-{
-    $sql = "UPDATE tbl_reserva SET status_reserva = :status WHERE id_reserva = :id";
-    $stmt = $this->db->prepare($sql);
-    $stmt->bindValue(':status', $status);
-    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+    public function atualizarStatus($id, $status)
+    {
+        $sql = "UPDATE tbl_reserva SET status_reserva = :status WHERE id_reserva = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':status', $status);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 
-    if ($stmt->execute()) {
-        if ($stmt->rowCount() > 0) {
-            return true; // Atualizado com sucesso
+        if ($stmt->execute()) {
+            if ($stmt->rowCount() > 0) {
+                return true; // Atualizado com sucesso
+            } else {
+                // Nenhuma linha alterada (talvez o valor já era o mesmo ou ID não existe)
+                file_put_contents('log_status_debug.txt', "Nenhuma linha alterada. ID: $id, Status: $status", FILE_APPEND);
+                return false;
+            }
         } else {
-            // Nenhuma linha alterada (talvez o valor já era o mesmo ou ID não existe)
-            file_put_contents('log_status_debug.txt', "Nenhuma linha alterada. ID: $id, Status: $status", FILE_APPEND);
+            $erro = $stmt->errorInfo();
+            file_put_contents('log_status_debug.txt', "Erro SQL: " . print_r($erro, true), FILE_APPEND);
             return false;
         }
-    } else {
-        $erro = $stmt->errorInfo();
-        file_put_contents('log_status_debug.txt', "Erro SQL: " . print_r($erro, true), FILE_APPEND);
-        return false;
     }
-}
+
+    public function getListarReservas()
+    {
+        $sql = "SELECT r.*, 
+                   c.nome_cliente, 
+                   f.nome_funcionario
+            FROM tbl_reserva r
+            JOIN tbl_cliente c ON c.id_cliente = r.id_cliente
+            JOIN tbl_funcionario f ON f.id_funcionario = r.id_funcionario
+            WHERE r.status_reserva IN ('Pendente','Confirmada')";
+
+        $sql = $this->db->query($sql);
+
+        if ($sql->rowCount() > 0) {
+            return $sql->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        return [];
+    }
 }
