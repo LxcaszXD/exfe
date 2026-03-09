@@ -570,8 +570,7 @@ $dados['acompanhamentos'] = $acompanhamentos;
         </script>
       </div>
 
-
-
+      <?php if (strpos($_SERVER['REQUEST_URI'], 'dashboard') !== false): ?>
       <div class="row mt-4">
         <div class="col-lg-7 mb-lg-0 mb-4">
           <div class="card z-index-2 h-100" style="background-color: #fffcea; border: 2px solid #371406; border-radius: 20px; box-shadow: 0 4px 15px rgba(55, 20, 6, 0.2);">
@@ -900,8 +899,7 @@ $dados['acompanhamentos'] = $acompanhamentos;
         </div>
       </div>
 
-
-
+      <?php endif; ?>
       <footer class="footer pt-3" style="background-color: #371406 ; border-top: 2px solid #ffd8b9;">
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">
@@ -911,42 +909,39 @@ $dados['acompanhamentos'] = $acompanhamentos;
                 <script>
                   document.write(new Date().getFullYear());
                 </script>
-                , feito com
-                <i class="fa fa-heart" style="color: #ff6f61;"></i> por
                 <a
-                  href="https://www.creative-tim.com"
+                  href="#"
                   class="font-weight-bold"
                   target="_blank"
-                  style="color: #371406; text-decoration: none;">Creative Tim</a>
-                para uma web melhor.
+                  style="color: #371406; text-decoration: none;">Exfé</a>
               </div>
             </div>
             <div class="col-lg-6">
               <ul class="nav nav-footer justify-content-center justify-content-lg-end">
                 <li class="nav-item">
                   <a
-                    href="https://www.creative-tim.com"
+                    href="#"
                     class="nav-link"
                     target="_blank"
-                    style="color: #371406; font-weight: bold; font-size: 0.9rem;">Creative Tim</a>
+                    style="color: #371406; font-weight: bold; font-size: 0.9rem;">Home</a>
                 </li>
                 <li class="nav-item">
                   <a
-                    href="https://www.creative-tim.com/presentation"
+                    href="#"
                     class="nav-link"
                     target="_blank"
-                    style="color: #371406; font-weight: bold; font-size: 0.9rem;">About Us</a>
+                    style="color: #371406; font-weight: bold; font-size: 0.9rem;">Menu</a>
                 </li>
                 <li class="nav-item">
                   <a
-                    href="https://www.creative-tim.com/blog"
+                    href="#"
                     class="nav-link"
                     target="_blank"
                     style="color: #371406; font-weight: bold; font-size: 0.9rem;">Blog</a>
                 </li>
                 <li class="nav-item">
                   <a
-                    href="https://www.creative-tim.com/license"
+                    href="#"
                     class="nav-link pe-0"
                     target="_blank"
                     style="color: #371406; font-weight: bold; font-size: 0.9rem;">License</a>
