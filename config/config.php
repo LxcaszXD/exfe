@@ -4,54 +4,24 @@ if(session_status() == PHP_SESSION_NONE){
     session_start();
 }
 
-/*
-|--------------------------------------------------------------------------
-| URL BASE
-|--------------------------------------------------------------------------
-| Local = localhost
-| Produção = domínio automático Railway
-*/
+define("BASE_URL", "http://localhost/exfe/public/");
 
-$base = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost';
 
-if($base == 'localhost'){
-    define("BASE_URL", "http://localhost/exfe/public/");
-}else{
-    define("BASE_URL", "https://" . $base . "/");
-}
+define("DB_HOST", "localhost:3306");
+define("DB_NAME", "db_exfe");
+define("DB_USER", "root");
+define("DB_PASS", "");
 
-/*
-|--------------------------------------------------------------------------
-| BANCO DE DADOS
-|--------------------------------------------------------------------------
-| Railway usa variáveis de ambiente
-*/
+define('EMAIL_HOST', 'smtp.hostinger.com');
+define('EMAIL_PORT', '465');
+define('EMAIL_USER', 'innovaclicktipi02@smpsistema.com.br');
+define('EMAIL_PASS', 'Senac@tipi02');
 
-define("DB_HOST", getenv("DB_HOST") ?: "localhost");
-define("DB_NAME", getenv("DB_NAME") ?: "db_exfe");
-define("DB_USER", getenv("DB_USER") ?: "root");
-define("DB_PASS", getenv("DB_PASS") ?: "");
-
-/*
-|--------------------------------------------------------------------------
-| EMAIL
-|--------------------------------------------------------------------------
-*/
-
-define('EMAIL_HOST', getenv("EMAIL_HOST") ?: 'smtp.hostinger.com');
-define('EMAIL_PORT', getenv("EMAIL_PORT") ?: '465');
-define('EMAIL_USER', getenv("EMAIL_USER"));
-define('EMAIL_PASS', getenv("EMAIL_PASS"));
-
-/*
-|--------------------------------------------------------------------------
-| AUTOLOAD
-|--------------------------------------------------------------------------
-*/
-
+// Sistema de autoload das class
 spl_autoload_register(function ($classe){
 
     if(file_exists('../app/controllers/' . $classe .'.php')){
+
         require_once '../app/controllers/'. $classe .'.php';
     }
 
@@ -64,3 +34,5 @@ spl_autoload_register(function ($classe){
     }
 
 });
+
+
